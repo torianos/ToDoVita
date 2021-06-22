@@ -22,12 +22,8 @@
         <div class="container">
           <div class="logo">ToDoVita</div>
           <div class="form">
-            <input
-              type="text"
-              v-bind:value="valueInput"
-              v-on:input="handlyInput"
-              v-on:keypress.enter="addTask"
-            />
+            <input type="text" v-bind:value="valueInput"
+            v-on:input="handlyInput" // v-on:keypress.enter="addTask" // />
             <button class="btn" v-on:click="addTask">Добавить</button>
           </div>
         </div>
@@ -74,8 +70,54 @@
         </ul>
       </div>
     </div>
+    <div class="tods" id="app1">
+      <h1 class="heading">Список задач с важными/обычными делами</h1>
 
-    <script src="https://unpkg.com/vue@next"></script>
+      <ol class="todo-list">
+        <newtask1
+          v-for="(co, index) in comp"
+          v-bind:co="co"
+          v-bind:key="co.id"
+          v-bind:title="co.title"
+          v-on:remove="comp.splice(index, 1)"
+        ></newtask1>
+      </ol>
+
+      <form class="todo-form">
+        <label class="input-label" for="todo-input">Добавьте задачу</label>
+        <input
+          v-model="val"
+          type="text"
+          class="todo-input"
+          id="todo-input"
+          required
+        />
+        <button
+          type="button"
+          class="todo-priority"
+          v-bind:class="{important : selected}"
+          @click="toggleclass"
+        >
+          {{textbtn}}
+        </button>
+        <button type="button" class="todo-add" @click="addquest">
+          Добавить в список
+        </button>
+      </form>
+    </div>
+    <div id="app2">
+      <div class="display">{{test}}</div>
+      <button
+        v-for="(n, index) in numbers"
+        v-bind:key="n.id"
+        v-on:click="test = test + n"
+      >
+        {{ n }}
+      </button>
+      <button v-on:click="deltext">del</button>
+    </div>
+
+    <script src="vue.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
